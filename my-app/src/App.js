@@ -7,10 +7,14 @@ import {
   Switch,
   NavLink
 } from 'react-router-dom';
+import PokemonDetails from "./Components/PokemonDetails";
 
 function App() {
   return  <HashRouter>
-            <Route exact path="/" component={Pokemons}/>
+            <Switch>
+              <Route exact path="/" component={Pokemons}/>
+              <Route path="/:name" component={PokemonDetails}/>
+            </Switch>
           </HashRouter>;
 }
 
