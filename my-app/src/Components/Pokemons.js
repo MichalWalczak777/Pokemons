@@ -5,12 +5,16 @@ import Pokemon from "./Pokemon";
 const Pokemons = () => {
     
     const pokemonsToDisplay = 151;
-    const pokemonImages = [];
 
-    for (let i = 0; i < pokemonsToDisplay; i++){
-        pokemonImages.push(`https://pokeres.bastionbot.org/images/pokemon/${i+1}.png`);
+    const createImagesList = (pokemonsToDisplay) => {
+        const pokeImages = [];
+        for (let i = 0; i < pokemonsToDisplay; i++){
+            pokeImages.push(`https://pokeres.bastionbot.org/images/pokemon/${i+1}.png`);
+        }
+        return pokeImages;
     }
-    
+
+    const [pokemonImages, setPokemonImages] = useState(createImagesList(pokemonsToDisplay));
     const [pokemonData, setPokemonData] = useState([]);
 
 
@@ -23,17 +27,18 @@ const Pokemons = () => {
                 newPokemonData.push({name: results[i].name, imageUrl: pokemonImages[i]})
             }
             setPokemonData(newPokemonData);
-            console.log(pokemonData);
         })
 
 
 
 
-    },[])
+    },[pokemonImages])
+
+
 
     return (
         <>
-            {pokemonData?.map(el => <Pokemon name={el.name} imageUrl={el.imageUrl}/>)}
+            {pokemonData?.map(el => <Pokemon key={el.name} name={el.name} imageUrl={el.imageUrl}/>)}
         </>
     )
 }
