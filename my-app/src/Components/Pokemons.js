@@ -37,9 +37,9 @@ const Pokemons = () => {
 
 
     return (
-        <>
+        <div class ="Pokemons-container">
             {pokemonData?.map(el => <Pokemon key={el.name} name={el.name} imageUrl={el.imageUrl}/>)}
-        </>
+        </div>
     )
 }
 
