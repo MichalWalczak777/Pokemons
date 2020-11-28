@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
-import Pokemon from "./Pokemon";
+import Pagination from "./Pagination";
+import PokemonPrinter from "./PokemonPrinter";
 
 const Pokemons = () => {
     
@@ -14,11 +15,14 @@ const Pokemons = () => {
         return pokeImages;
     }
 
-    const [pokemonImages, setPokemonImages] = useState(createImagesList(pokemonsToDisplay));
+    const [pokemonImages] = useState(createImagesList(pokemonsToDisplay));
     const [pokemonData, setPokemonData] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pokemonsPerPage] = useState(30);
 
 
     useEffect(()=>{
+        
         axios.get(`https://pokeapi.co/api/v2/pokemon?limit=${pokemonsToDisplay}`)
         .then(resp => resp.data.results)        
         .then(results => {
@@ -28,17 +32,21 @@ const Pokemons = () => {
             }
             setPokemonData(newPokemonData);
         })
-
-
-
-
     },[pokemonImages])
 
+    const indexOfLastPokemon = currentPage * pokemonsPerPage;
+    const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage;
+    const currentPokemons = pokemonData?.slice(indexOfFirstPokemon, indexOfLastPokemon)
 
+    const paginate = pageNumber => e =>{
+        e.preventDefault();
+        setCurrentPage(pageNumber);
+    }
 
     return (
-        <div class ="Pokemons-container">
-            {pokemonData?.map(el => <Pokemon key={el.name} name={el.name} imageUrl={el.imageUrl}/>)}
+        <div className ="Pokemons-container">
+            <PokemonPrinter pokemons ={currentPokemons}/>
+            <Pagination pokemonsTotal={pokemonData.length} pokemonsPerPage={pokemonsPerPage} paginate={paginate}/>
         </div>
     )
 }
