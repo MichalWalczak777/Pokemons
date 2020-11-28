@@ -8,13 +8,15 @@ import {
   NavLink
 } from 'react-router-dom';
 import PokemonDetails from "./Components/PokemonDetails";
+import Navigation from "./Components/Navigation";
 
 function App() {
   return  <HashRouter>
-            <Switch>
-              <Route exact path="/" component={Pokemons}/>
-              <Route path="/:name" component={PokemonDetails}/>
-            </Switch>
+              <Navigation/>
+              <Switch>
+                <Route exact path="/pokemons" component={Pokemons}/>
+                <Route path="/pokemons/:name" component={PokemonDetails}/>
+              </Switch>
           </HashRouter>;
 }
 

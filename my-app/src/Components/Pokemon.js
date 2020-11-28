@@ -11,7 +11,7 @@ const Pokemon = ({name, imageUrl}) => {
     
     return (
         <div className="Pokemon-wrapper">
-            <Link to={"/" + name}>
+            <Link to={"/pokemons/" + name}>
                 <h2>{name}</h2>
                 <img className="Pokemon-image" src={imageUrl}/>
             </Link>

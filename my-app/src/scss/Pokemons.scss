@@ -1,0 +1,8 @@
+.Pokemons-container{
+    max-width: 1024px;
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap:10px;
+}
