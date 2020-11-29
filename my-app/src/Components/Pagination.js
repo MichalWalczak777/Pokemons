@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import ReactPaginate from 'react-paginate';
 
 const Pagination = ({pokemonsTotal, pokemonsPerPage, paginate}) => {
 
@@ -9,17 +9,21 @@ const Pagination = ({pokemonsTotal, pokemonsPerPage, paginate}) => {
     }
     
     return (
-        <nav className = "pagination-nav">
-            <ul className="pagination-list">
-                {pageNumbers.map(number => 
-                    <li key={number} className="pagination-item">
-                        <a onClick ={paginate(number)} href="#" className="pagination-link">
-                            {number}
-                        </a>
-                    </li>)}
-            </ul>
-        </nav>
+    <ReactPaginate
+    previousLabel={"previous"}
+    nextLabel={"next"}
+    breakLabel={"..."}
+    breakClassName={"break"}
+    pageCount={pageNumbers.length}
+    marginPagesDisplayed={2}
+    pageRangeDisplayed={3}
+    onPageChange={paginate}
+    containerClassName={"pagination-container"}
+    subContainerClassName={"pagination-page"}
+    activeClassName={"pagination-current-page"}
+    />
     )
+
 }
 
 export default Pagination;

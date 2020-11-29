@@ -1,13 +1,31 @@
-
-.pagination-nav{
-    width:100%;
-}
-
-.pagination-list{
-    display:flex;
+.pagination-container{
     list-style:none;
+    display: flex;
     justify-content: center;
     li{
-        margin:10px;
+        &:hover{
+            cursor: pointer;
+        }
+        &:focus{
+            outline: 0;
+            border: none;
+            box-shadow: none;
+        }
+        a{
+            padding:10px;
+            border: 1px solid lightgrey;
+            background-color: rgb(236, 229, 229);
+            color: rgb(56, 56, 56);
+
+        }
+        &.pagination-current-page{
+                a{
+                    background-color: blue;
+                    color:white;
+                }
+        }
     }
+
+
 }
+  
