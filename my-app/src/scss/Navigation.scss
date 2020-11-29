@@ -1,6 +1,11 @@
+.navigation-nav{
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
 
-
-.Navigation-list{
+.navigation-list{
+    margin: 0;
     display:flex;
     justify-content: center;
     list-style:none;

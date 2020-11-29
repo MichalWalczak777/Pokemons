@@ -1,5 +1,9 @@
 import "./scss/main.scss";
 import Pokemons from "./Components/Pokemons";
+import Home from "./Components/Home";
+import PokemonDetails from "./Components/PokemonDetails";
+import Navigation from "./Components/Navigation";
+
 import {
   HashRouter,
   Route,
@@ -7,17 +11,19 @@ import {
   Switch,
   NavLink
 } from 'react-router-dom';
-import PokemonDetails from "./Components/PokemonDetails";
-import Navigation from "./Components/Navigation";
 
-function App() {
-  return  <HashRouter>
+const App = () => {
+
+  return  (
+          <HashRouter>
               <Navigation/>
               <Switch>
+              <Route exact path="/" component={Home}/>
                 <Route exact path="/pokemons" component={Pokemons}/>
                 <Route path="/pokemons/:name" component={PokemonDetails}/>
               </Switch>
-          </HashRouter>;
+          </HashRouter>
+          )
 }
 
 export default App;
