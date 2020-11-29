@@ -6,12 +6,12 @@ import {
 const Pokemon = () => {
     
     return (
-        <nav className="Navigation-nav">
-            <ul className="Navigation-list">
-                <li><Link to={"/Home"}>Home</Link></li>
-                <li><Link to={"/About"}>About</Link></li>
+        <nav className="navigation-nav">
+            <ul className="navigation-list">
+                <li><Link to={"/"}>Home</Link></li>
+                <li><Link to={"/about"}>About</Link></li>
                 <li><Link to={"/pokemons"}>Pokemons</Link></li>
-                <li><Link to={"/pokemons"}>Favourites</Link></li>
+                <li><Link to={"/favourites"}>Favourites</Link></li>
             </ul>
         </nav>
     )

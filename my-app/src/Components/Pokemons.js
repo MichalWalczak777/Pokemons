@@ -3,7 +3,7 @@ import axios from "axios";
 import Pagination from "./Pagination";
 import PokemonPrinter from "./PokemonPrinter";
 
-const Pokemons = () => {
+const Pokemons = ({settingFavourites}) => {
     
     const pokemonsToDisplay = 151;
 
@@ -18,7 +18,7 @@ const Pokemons = () => {
     const [pokemonImages] = useState(createImagesList(pokemonsToDisplay));
     const [pokemonData, setPokemonData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [pokemonsPerPage] = useState(6);
+    const [pokemonsPerPage] = useState(12);
 
 
     useEffect(()=>{
