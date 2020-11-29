@@ -18,7 +18,7 @@ const Pokemons = () => {
     const [pokemonImages] = useState(createImagesList(pokemonsToDisplay));
     const [pokemonData, setPokemonData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [pokemonsPerPage] = useState(30);
+    const [pokemonsPerPage] = useState(6);
 
 
     useEffect(()=>{
@@ -38,16 +38,18 @@ const Pokemons = () => {
     const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage;
     const currentPokemons = pokemonData?.slice(indexOfFirstPokemon, indexOfLastPokemon)
 
-    const paginate = pageNumber => e =>{
-        e.preventDefault();
-        setCurrentPage(pageNumber);
+    const paginate = pageNumber =>{
+        setCurrentPage(pageNumber.selected+1);
+        console.log(currentPage);
     }
 
     return (
+        <>
         <div className ="Pokemons-container">
             <PokemonPrinter pokemons ={currentPokemons}/>
-            <Pagination pokemonsTotal={pokemonData.length} pokemonsPerPage={pokemonsPerPage} paginate={paginate}/>
         </div>
+        <Pagination pokemonsTotal={pokemonData.length} pokemonsPerPage={pokemonsPerPage} paginate={paginate}/>
+        </>
     )
 }
 
