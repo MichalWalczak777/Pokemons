@@ -28,7 +28,7 @@ const Pokemons = ({settingFavourites}) => {
         .then(results => {
             const newPokemonData = [];
             for (let i = 0; i < pokemonsToDisplay; i++){
-                newPokemonData.push({name: results[i].name, imageUrl: pokemonImages[i]})
+                newPokemonData.push({name: results[i].name, imageUrl: pokemonImages[i], pokemonId: i});
             }
             setPokemonData(newPokemonData);
         })
