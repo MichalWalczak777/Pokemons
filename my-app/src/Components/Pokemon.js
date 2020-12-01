@@ -7,11 +7,11 @@ import {
     NavLink
   } from 'react-router-dom';
 
-const Pokemon = ({name, imageUrl}) => {
+const Pokemon = ({name, imageUrl, index}) => {
     
     return (
         <div className="Pokemon-wrapper">
-            <Link to={"/pokemons/" + name}>
+            <Link to={"/pokemons/" + index + "/" + name}>
                 <h2>{name}</h2>
                 <img className="Pokemon-image" src={imageUrl}/>
             </Link>
