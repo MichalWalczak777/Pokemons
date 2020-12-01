@@ -5,7 +5,7 @@ import PokemonPrinter from "./PokemonPrinter";
 
 const Pokemons = ({settingFavourites}) => {
     
-    const pokemonsToDisplay = 151;
+    const pokemonsToDisplay = 250;
 
     const createImagesList = (pokemonsToDisplay) => {
         const pokeImages = [];
