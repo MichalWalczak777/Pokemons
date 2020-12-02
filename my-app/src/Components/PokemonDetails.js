@@ -1,17 +1,23 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {Link, useParams} from 'react-router-dom';
 
-const PokemonDetails = ({addToFavourites}) => {
+const PokemonDetails = ({addToFavourites, isFavourite, removeFromFavourites}) => {
 
     const {name, index} = useParams();
     let imageId = parseInt(index)+1; 
     let src = `https://pokeres.bastionbot.org/images/pokemon/${imageId}.png`;
 
-    const [buttonText, setButtonText] = useState("Lubię to");
+    const [buttonText, setButtonText] = useState();
+
+    useEffect(()=>{
+        console.log(isFavourite(name));
+        const text = isFavourite(name) ? "Nie lubię" : "Lubię to";
+        setButtonText(text);
+    },[])
 
     const handleOnClick = (name, index) => e => {
-        // buttonText==="Lubię to" ? setButtonText("Nie lubię") : setButtonText("Lubię to");
-        addToFavourites(name, index);
+        buttonText==="Lubię to" ? setButtonText("Nie lubię") : setButtonText("Lubię to");
+        isFavourite(name) ? removeFromFavourites(name) : addToFavourites(name, index);
     }
 
     return (
