@@ -6,7 +6,7 @@ const PokemonPrinter = ({pokemons}) => {
     
     return (
         <>
-        {pokemons?.map((el, i) => <Pokemon key={el.name} name={el.name} imageUrl={el.imageUrl} index={el.pokemonId}/>)}
+        {pokemons?.map(pok => <Pokemon key={pok.name} name={pok.name} imageUrl={pok.imageUrl} index={pok.pokemonId}/>)}
         </>
     )
 }
