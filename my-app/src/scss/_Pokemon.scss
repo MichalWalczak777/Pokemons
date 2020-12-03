@@ -1,0 +1,25 @@
+.Pokemon-image{
+    width:175px;
+    height:175px;
+    display:block;
+}
+
+.Pokemon-wrapper{
+      margin:20px;
+      display:flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid #2b578d;
+      border-radius:20px;
+      box-shadow: 0 3px 3px 2px rgba(0, 0, 0, 0.23);
+    }
+
+.pokemon-header{
+    color:#2b578d;
+    text-align:center;
+}
+
+.pokemon-button{
+    margin:10px;
+}
