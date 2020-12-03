@@ -1,0 +1,31 @@
+.navigation-nav{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #c2cedb;
+}
+
+.navigation-container{
+    display: flex;
+    justify-content: space-between;
+    max-width:900px;
+}
+
+.navigation-list{
+    margin: 0;
+    display:flex;
+    list-style:none;
+    li{
+        padding:20px;
+        border-bottom: solid 3px transparent;
+        &:hover{
+            cursor: pointer;
+            border-color:blue;
+        }
+    }
+}
+
+
+   
+    
+

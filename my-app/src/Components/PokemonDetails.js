@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import {Link, useParams} from 'react-router-dom';
+import axios from "axios";
 
 const PokemonDetails = ({addToFavourites, isFavourite, removeFromFavourites}) => {
 
@@ -8,25 +9,67 @@ const PokemonDetails = ({addToFavourites, isFavourite, removeFromFavourites}) =>
     let src = `https://pokeres.bastionbot.org/images/pokemon/${imageId}.png`;
 
     const [buttonText, setButtonText] = useState();
+    const [height, setHeight] = useState();
+    const [weight, setWeight] = useState();
+    const [abilities, setAbilities] = useState();
+    const [experience, setExperience] = useState();
+    const [stats, setStats] = useState();
 
     useEffect(()=>{
         console.log(isFavourite(name));
-        const text = isFavourite(name) ? "Nie lubię" : "Lubię to";
+        const text = isFavourite(name) ? "Remove from favourites" : "Add to favourites";
         setButtonText(text);
+        
+        axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`)
+        .then(resp => resp.data)
+        .then(data => {
+            setHeight(data.height/10);
+            setWeight(data.weight/10);
+            setAbilities(data.abilities);
+            setExperience(data.base_experience);
+            setStats(data.stats);
+        })
+
+
+        // axios.get(`https://pokeapi.co/api/v2/evolution-chain/${index}`)
+        // .then(resp => console.log(resp.data.chain));
+
+
     },[])
 
     const handleOnClick = (name, index) => e => {
-        buttonText==="Lubię to" ? setButtonText("Nie lubię") : setButtonText("Lubię to");
+        buttonText==="Add to favourites" ? setButtonText("Remove from favourites") : setButtonText("Add to favourites");
         isFavourite(name) ? removeFromFavourites(name) : addToFavourites(name, index);
     }
 
     return (
         <div className="container pokemonDetails-container">
-            <h2>{name}</h2>
-            <img className="pokemonDetails-image" src={src} alt=""/>
-            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat</p>
-            <button onClick={handleOnClick(name, index)}> {buttonText}</button>
-            <Link to="/pokemons">Wróć</Link>
+            <ul>
+                {/* <li><Link to="/pokemons">Wróć</Link></li> */}
+                <li><h2>{name}</h2></li>
+                <li><span className="pokemonDetails-statName">height[m]:</span><span className="pokemonDetails-statValue"> {height}</span></li>
+                <li><span className="pokemonDetails-statName">weight[kg]:</span> <span className="pokemonDetails-statValue">{weight}</span></li>
+                
+                {stats?.map(stat => 
+                <li key={stat.stat.name}>
+                    <span className="pokemonDetails-statName">{stat.stat.name}:</span> 
+                    <span className="pokemonDetails-statValue">{stat.base_stat}</span></li>)}
+
+                <li><span className="pokemonDetails-statName">experience gained:</span>
+                <span className="pokemonDetails-statValue">{experience}</span></li>
+
+                <li> <span className="pokemonDetails-statName">abilities:</span></li>
+
+                {abilities?.map(ablt => <li key={ablt.ability.name}> 
+                    <span className="pokemonDetails-statName"></span>
+                    <span className="pokemonDetails-statValue">{ablt.ability.name}</span></li>)}
+
+            </ul>
+            
+            <div className="pokemonDetails-dataWrapper">
+                <img className="pokemonDetails-image" src={src} alt=""/>
+                <button className="general-button pokemonDetails-button" onClick={handleOnClick(name, index)}> {buttonText}</button>
+            </div>
         </div>
     )
 

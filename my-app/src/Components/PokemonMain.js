@@ -3,6 +3,7 @@ import axios from "axios";
 
 import Pokemons from "./Pokemons";
 import Home from "./Home";
+import About from "./About";
 import PokemonDetails from "./PokemonDetails";
 import Navigation from "./Navigation";
 
@@ -67,10 +68,11 @@ console.log(favouritePokemons);
         <HashRouter>
             <Navigation/>
             <Switch>
-            <Route exact path="/" component={Home}/>
-              <Route exact path="/pokemons" render={(props) => <Pokemons {...props} pokemonData={pokemonData}/>} />
-              <Route exact path="/favourites" render={(props) => <Pokemons {...props} pokemonData={favouritePokemons}/>} />
-              <Route exact path="/pokemons/:index/:name" render={(props) => <PokemonDetails {...props} 
+                <Route exact path="/" component={Home}/>
+                <Route exact path="/about" component={About}/>
+                <Route exact path="/pokemons" render={(props) => <Pokemons {...props} pokemonData={pokemonData}/>} />
+                <Route exact path="/favourites" render={(props) => <Pokemons {...props} pokemonData={favouritePokemons}/>} />
+                <Route exact path="/pokemons/:index/:name" render={(props) => <PokemonDetails {...props} 
                                                                                 addToFavourites={addToFavourites} 
                                                                                 removeFromFavourites = {removeFromFavourites} 
                                                                                 isFavourite={isFavourite} />} />
