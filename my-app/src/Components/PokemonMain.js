@@ -75,17 +75,14 @@ console.log(favouritePokemons);
     return (favouritePokemons.some(pokemon => pokemon.name === name));
   }
 
-    // const filterData = e => {
-    //   setFilteredData([...pokemonData.filter(pokemon => pokemon.name.startsWith(e.target.value))]);
-    // }
-
-    // const filterFavourites = e => {
-    //   setFilteredFavourites([...favouritePokemons.filter(pokemon => pokemon.name.startsWith(e.target.value))]);
-    // }
-
     const filteredSearch = e => {
       setFilteredFavourites([...favouritePokemons.filter(pokemon => pokemon.name.startsWith(e.target.value))]);
       setFilteredData([...pokemonData.filter(pokemon => pokemon.name.startsWith(e.target.value))]);
+    }
+
+    const clear = () => {
+      setFilteredFavourites(favouritePokemons);
+      setFilteredData(pokemonData);
     }
 
   return (
@@ -95,9 +92,11 @@ console.log(favouritePokemons);
                 <Route exact path="/" component={Home}/>
                 <Route exact path="/about" component={About}/>
                 <Route exact path="/pokemons" render={(props) => <Pokemons {...props} pokemonData={filteredData} 
-                                                                                      filteredSearch={filteredSearch}/>} />
+                                                                                      filteredSearch={filteredSearch}
+                                                                                      clear={clear}/>} />
                 <Route exact path="/favourites" render={(props) => <Pokemons {...props} pokemonData={filteredFavourites} 
-                                                                                        filteredSearch={filteredSearch}/>} />
+                                                                                        filteredSearch={filteredSearch}
+                                                                                        clear={clear}/>} />
                 <Route exact path="/pokemons/:index/:name" render={(props) => <PokemonDetails {...props} 
                                                                                 addToFavourites={addToFavourites} 
                                                                                 removeFromFavourites = {removeFromFavourites} 
