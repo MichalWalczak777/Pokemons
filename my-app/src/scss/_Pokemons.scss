@@ -1,8 +1,19 @@
-.Pokemons-container{
-    max-width: 1024px;
-    margin: 70px auto;
+.pokemons-container{
+    margin-top: 70px;
+    display: flex;
+    flex-direction: column;
+}
 
+.pokemons-wrapper{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap:10px;
+}
+
+.pokemons-search{
+    width:30%;
+    align-self: center;
+    padding: 10px 20px;
+    border-radius: 6px;
+    margin: 20px 0;
 }

@@ -17,7 +17,7 @@ import {
 
 const PokemonMain = () => {
 
-  const pokemonsToDisplay = 400;
+  const pokemonsToDisplay = 800;
 
   const createImagesList = (pokemonList) => {
     const pokeImages = [];
@@ -30,20 +30,32 @@ const PokemonMain = () => {
 const [favouritePokemons, setFavouritePokemons] = useState([]);
 const [pokemonImages] = useState(createImagesList(pokemonsToDisplay));
 const [pokemonData, setPokemonData] = useState([]);
+const [filteredFavourites, setFilteredFavourites] = useState([]);
+const [filteredData, setFilteredData] = useState([]);
 
-useEffect(()=>{
-        
-    axios.get(`https://pokeapi.co/api/v2/pokemon?limit=${pokemonsToDisplay}`)
-    .then(resp => resp.data.results)        
-    .then(results => {
-        const newPokemonData = [];
-        for (let i = 0; i < pokemonsToDisplay; i++){
-            newPokemonData.push({name: results[i].name, imageUrl: pokemonImages[i], pokemonId: i});
-        }
-        setPokemonData(newPokemonData);
-    })
-},[pokemonImages])
-  
+
+    useEffect(()=>{
+            
+        axios.get(`https://pokeapi.co/api/v2/pokemon?limit=${pokemonsToDisplay}`)
+        .then(resp => resp.data.results)        
+        .then(results => {
+            const newPokemonData = [];
+            for (let i = 0; i < pokemonsToDisplay; i++){
+                newPokemonData.push({name: results[i].name, imageUrl: pokemonImages[i], pokemonId: i});
+            }
+            setPokemonData(newPokemonData);
+        })
+    },[pokemonImages])
+
+    useEffect(()=>{
+          setFilteredFavourites(favouritePokemons);
+          setFilteredData(pokemonData);
+    },[favouritePokemons])
+
+    useEffect(()=>{
+      setFilteredData(pokemonData);
+    },[pokemonData])
+
 
   const addToFavourites = (name,index) => {
 
@@ -63,6 +75,18 @@ console.log(favouritePokemons);
     return (favouritePokemons.some(pokemon => pokemon.name === name));
   }
 
+    // const filterData = e => {
+    //   setFilteredData([...pokemonData.filter(pokemon => pokemon.name.startsWith(e.target.value))]);
+    // }
+
+    // const filterFavourites = e => {
+    //   setFilteredFavourites([...favouritePokemons.filter(pokemon => pokemon.name.startsWith(e.target.value))]);
+    // }
+
+    const filteredSearch = e => {
+      setFilteredFavourites([...favouritePokemons.filter(pokemon => pokemon.name.startsWith(e.target.value))]);
+      setFilteredData([...pokemonData.filter(pokemon => pokemon.name.startsWith(e.target.value))]);
+    }
 
   return (
         <HashRouter>
@@ -70,8 +94,10 @@ console.log(favouritePokemons);
             <Switch>
                 <Route exact path="/" component={Home}/>
                 <Route exact path="/about" component={About}/>
-                <Route exact path="/pokemons" render={(props) => <Pokemons {...props} pokemonData={pokemonData}/>} />
-                <Route exact path="/favourites" render={(props) => <Pokemons {...props} pokemonData={favouritePokemons}/>} />
+                <Route exact path="/pokemons" render={(props) => <Pokemons {...props} pokemonData={filteredData} 
+                                                                                      filteredSearch={filteredSearch}/>} />
+                <Route exact path="/favourites" render={(props) => <Pokemons {...props} pokemonData={filteredFavourites} 
+                                                                                        filteredSearch={filteredSearch}/>} />
                 <Route exact path="/pokemons/:index/:name" render={(props) => <PokemonDetails {...props} 
                                                                                 addToFavourites={addToFavourites} 
                                                                                 removeFromFavourites = {removeFromFavourites} 

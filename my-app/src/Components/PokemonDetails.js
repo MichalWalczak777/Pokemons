@@ -44,8 +44,8 @@ const PokemonDetails = ({addToFavourites, isFavourite, removeFromFavourites}) =>
 
     return (
         <div className="container pokemonDetails-container">
+        {/* <li><Link to="/pokemons">Wróć</Link></li> */}
             <ul>
-                {/* <li><Link to="/pokemons">Wróć</Link></li> */}
                 <li><h2>{name}</h2></li>
                 <li><span className="pokemonDetails-statName">height[m]:</span><span className="pokemonDetails-statValue"> {height}</span></li>
                 <li><span className="pokemonDetails-statName">weight[kg]:</span> <span className="pokemonDetails-statValue">{weight}</span></li>

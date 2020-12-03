@@ -2,10 +2,10 @@ import React, {useState, useEffect} from "react";
 import Pagination from "./Pagination";
 import PokemonPrinter from "./PokemonPrinter";
 
-const Pokemons = ({pokemonData}) => {
+const Pokemons = ({pokemonData, filteredSearch}) => {
     
     const [currentPage, setCurrentPage] = useState(1);
-    const [pokemonsPerPage] = useState(12);
+    const [pokemonsPerPage] = useState(9);
 
     const indexOfLastPokemon = currentPage * pokemonsPerPage;
     const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage;
@@ -17,12 +17,13 @@ const Pokemons = ({pokemonData}) => {
     }
 
     return (
-        <>
-        <div className ="Pokemons-container">
-            <PokemonPrinter pokemons ={currentPokemons}/>
+        <div className ="container pokemons-container">
+            <input className="pokemons-search" placeholder="Type to search" onChange={filteredSearch}/>
+            <div className ="pokemons-wrapper">
+                <PokemonPrinter pokemons ={currentPokemons}/>
+            </div>
+            <Pagination pokemonsTotal={pokemonData.length} pokemonsPerPage={pokemonsPerPage} paginate={paginate}/>
         </div>
-        <Pagination pokemonsTotal={pokemonData.length} pokemonsPerPage={pokemonsPerPage} paginate={paginate}/>
-        </>
     )
 }
 
